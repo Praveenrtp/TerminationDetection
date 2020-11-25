@@ -21,7 +21,7 @@ public class Server extends AbstractVerticle {
     Router router = Router.router(vertx);
     router.route().handler(BodyHandler.create());
     router.route("/").handler(new ServerHandler(vertx, node));
-    router.route(path).handler(new SimulatorHandler(vertx, portNo));
+    router.route(path).handler(new SimulatorHandler(vertx));
 
     vertx.createHttpServer()
         .requestHandler(router)

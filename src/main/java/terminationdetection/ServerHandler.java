@@ -24,10 +24,19 @@ public class ServerHandler implements Handler<RoutingContext> {
       ObjectMapper objectMapper = new ObjectMapper();
       Message message = objectMapper.readValue(routingContext.getBodyAsString(), Message.class);
       System.out.println("SenderNodeId :" + message.getSenderNodeID());
+      if (node.hasParent()) {
+        Message responseMessage = new Message();
+        responseMessage.setAck(true);
+        responseMessage.setSenderNodeID(node.getNodeId());
+        String responseJsonMessage = objectMapper.writeValueAsString(responseMessage);
+        routingContext.response().write(responseJsonMessage);
+      } else {
+        node.setParent(message.getSenderNodeID());
+        node.setState(State.ACTIVE.name());
+      }
     } catch (JsonProcessingException e) {
       e.printStackTrace();
     }
-
     routingContext.response().setStatusCode(200).end("Message Received");
   }
 
