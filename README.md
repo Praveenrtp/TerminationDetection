@@ -5,7 +5,7 @@ Executed a tree-based Dijkstra-Scholten algorithm for detecting termination in a
 The basis of termination detection is in the concept of a distributed system process' state. At any time, a process in a distributed system is either in an active state or in an idle state. An active process may become idle at any time but an idle process may only become active again upon receiving a computational message.
 Termination occurs when all processes in the distributed system become idle and there are no computational messages in transit.
 
-## The Dijkstra–Scholten algorithm is a tree-based algorithm which can be described by the following:
+# The Dijkstra–Scholten algorithm is a tree-based algorithm which can be described by the following:
 - The initiator of a computation is the root of the tree.
 - Upon receiving a computational message:
     - If the receiving process is currently not in the computation: the process joins the tree by becoming a child of the sender of the message. (No acknowledgment message is sent at this point.)
